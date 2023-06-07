@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.fitness.R;
 import com.example.fitness.model.SportData;
+import com.example.fitness.service.SportDataService;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -142,9 +143,10 @@ public class SportActivity extends AppCompatActivity {
                                 String dateString = dateFormat.format(currentDate);
 
                                 SportData sportData = new SportData(dateString,  new_Calories, txt_minutes);
-                                sportData.calculateSportData(txt_minutes,new_Calories,dateString);
+                                SportDataService sportDataService=new SportDataService(dateString,  new_Calories, txt_minutes);
+                                sportDataService.calculateSportDataService(txt_minutes,new_Calories,dateString);
 
-                                writeNutritionDataToFirebase(sportData);
+                                writeNutritionDataToFirebase(sportDataService);
 
                                 txt_calories.setText("Calories "+ String.valueOf(sportData.getCalories()));
 
@@ -170,7 +172,7 @@ public class SportActivity extends AppCompatActivity {
 
     }
 
-    private void writeNutritionDataToFirebase(SportData sportData) {
+    private void writeNutritionDataToFirebase(SportDataService sportData) {
 
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Sport_data");
         String key = dbRef.push().getKey();

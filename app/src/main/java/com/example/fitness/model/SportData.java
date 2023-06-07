@@ -28,11 +28,5 @@ public class SportData {
         return minutes;
     }
 
-    public SportData calculateSportData(int minute, int caloriesNew, String date) {
-
-        caloriesNew = caloriesNew * minute;
-
-        return new SportData(date, caloriesNew, minute);
-    }
 
 }

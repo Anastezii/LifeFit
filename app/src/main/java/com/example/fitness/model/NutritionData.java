@@ -45,14 +45,6 @@ public class NutritionData {
         return grams;
     }
 
-    public NutritionData calculateNutritionData(double grams, double proteinPer100g, double carbohydratesPer100g, double caloriesPer100g, double fatsPer100g, String date) {
-        double protein = proteinPer100g * (grams / 100);
-        double carbohydrates = carbohydratesPer100g * (grams / 100);
-        double calories = caloriesPer100g * (grams / 100);
-        double fats = fatsPer100g * (grams / 100);
-
-        return new NutritionData(date, protein, carbohydrates, calories, fats,grams);
-    }
 
 
 }

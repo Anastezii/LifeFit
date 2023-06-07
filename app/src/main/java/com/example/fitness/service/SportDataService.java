@@ -30,7 +30,7 @@ public class SportDataService {
         return minutes;
     }
 
-    public SportDataService calculateSportData(int minute, int caloriesNew, String date) {
+    public SportDataService calculateSportDataService(int minute, int caloriesNew, String date) {
 
         caloriesNew = caloriesNew * minute;
 

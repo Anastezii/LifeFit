@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.fitness.R;
 import com.example.fitness.model.NutritionData;
+import com.example.fitness.service.NutritionDataService;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -106,9 +107,10 @@ public class SupperActivity extends AppCompatActivity {
                                 String dateString = dateFormat.format(currentDate);
 
                                 NutritionData nutritionData = new NutritionData(dateString, proteins, carbohydrates, calories, fats, txt_grams);
-                                nutritionData.calculateNutritionData(txt_grams,proteins,carbohydrates,calories,fats,dateString);
+                                NutritionDataService nutritionDataService=new NutritionDataService(dateString, proteins, carbohydrates, calories, fats, txt_grams);
+                                nutritionDataService.calculateNutritionData(txt_grams,proteins,carbohydrates,calories,fats,dateString);
 
-                                writeNutritionDataToFirebase(nutritionData);
+                                writeNutritionDataToFirebase(nutritionDataService);
 
                                 txt_calories.setText("Calories "+ String.valueOf(nutritionData.getCalories()));
 
@@ -132,7 +134,7 @@ public class SupperActivity extends AppCompatActivity {
 
     }
 
-    private void writeNutritionDataToFirebase(NutritionData nutritionData) {
+    private void writeNutritionDataToFirebase(NutritionDataService nutritionData) {
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Nutrition_data");
         DatabaseReference nutritionDataRef = dbRef.child("Supper");
         String key = nutritionDataRef.push().getKey();
