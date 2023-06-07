@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bottom_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:iconTint="#D82F2F"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/bottom_activity"
+        android:icon="@drawable/dumbbell"
+        android:iconTint="#D82F2F"
+        android:title="Activity" />
+
+    <item
+        android:id="@+id/bottom_eat"
+        android:icon="@drawable/restaurant"
+        android:iconTint="#D82F2F"
+        android:title="Food" />
+
+    <item
+        android:id="@+id/bottom_calories"
+        android:icon="@drawable/www"
+        android:iconTint="#D82F2F"
+        android:title="Calories" />
+
+</menu>

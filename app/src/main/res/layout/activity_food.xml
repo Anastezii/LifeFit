@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FoodActivity"
+    android:background="#A9A9A9">
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottomNavigationBar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.995"
+        app:menu="@menu/bottom_menu"
+        android:textColor="#C0C0C0"/>
+
+    <TextView
+        android:id="@+id/textView31"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="Please choose:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#D53E3E"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.074" />
+
+    <Button
+        android:id="@+id/button_breakfast"
+        android:layout_width="253dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="132dp"
+        android:text="Breakfast"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView31"
+        tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck"
+        android:backgroundTint="#B22222"/>
+
+    <Button
+        android:id="@+id/button_second_breakfast"
+        android:layout_width="258dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="16dp"
+        android:text="Second Breakfast"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_breakfast"
+        tools:ignore="TouchTargetSizeCheck"
+        android:backgroundTint="#B22222"/>
+
+    <Button
+        android:id="@+id/button_dinner"
+        android:layout_width="257dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="8dp"
+        android:text="Dinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_second_breakfast"
+        tools:ignore="TouchTargetSizeCheck"
+        android:backgroundTint="#B22222"/>
+
+    <Button
+        android:id="@+id/button_afternoon_snack"
+        android:layout_width="257dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="8dp"
+        android:text="Afternoon snack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_dinner"
+        android:backgroundTint="#B22222"/>
+
+    <Button
+        android:id="@+id/button_supper"
+        android:layout_width="257dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="4dp"
+        android:text="Supper"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_afternoon_snack"
+        tools:ignore="TouchTargetSizeCheck"
+        android:backgroundTint="#B22222"/>
+
+    <Button
+        android:id="@+id/button_snack"
+        android:layout_width="253dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="8dp"
+        android:text="Snack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_supper"
+        tools:ignore="TouchTargetSizeCheck"
+        android:backgroundTint="#B22222"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
