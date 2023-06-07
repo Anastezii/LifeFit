@@ -1,5 +1,7 @@
 package com.example.fitness;
 
+import com.example.fitness.model.NutritionData;
+
 import junit.framework.TestCase;
 
 import org.junit.Test;

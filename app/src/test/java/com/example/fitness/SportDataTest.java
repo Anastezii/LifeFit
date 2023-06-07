@@ -1,6 +1,6 @@
 package com.example.fitness;
 
-import static org.junit.Assert.*;
+import com.example.fitness.model.SportData;
 
 import org.junit.Test;
 
