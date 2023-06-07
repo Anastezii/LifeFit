@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AfternoonSnackActivity"
+    tools:context=".controller.AfternoonSnackActivity"
     tools:ignore="ExtraText"
     android:background="#A9A9A9">
 

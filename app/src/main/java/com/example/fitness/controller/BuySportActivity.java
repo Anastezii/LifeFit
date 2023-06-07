@@ -1,4 +1,4 @@
-package com.example.fitness;
+package com.example.fitness.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,16 +10,17 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import com.example.fitness.R;
 import com.google.android.gms.common.SignInButton;
 
-public class BuyFoodActivity extends AppCompatActivity {
+public class BuySportActivity extends AppCompatActivity {
 
     private SignInButton button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_buy_food);
+        setContentView(R.layout.activity_buy_sport);
 
         button=findViewById(R.id.google_pay_button);
 
@@ -30,11 +31,12 @@ public class BuyFoodActivity extends AppCompatActivity {
             }
         });
 
+
     }
 
     private void showDialog() {
 
-        final Dialog dialog=new Dialog(BuyFoodActivity.this);
+        final Dialog dialog=new Dialog(BuySportActivity.this);
 
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
@@ -66,7 +68,7 @@ public class BuyFoodActivity extends AppCompatActivity {
 
     private void showAccepted() {
 
-        final Dialog dialog=new Dialog(BuyFoodActivity.this);
+        final Dialog dialog=new Dialog(BuySportActivity.this);
 
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
@@ -84,5 +86,6 @@ public class BuyFoodActivity extends AppCompatActivity {
         dialog.show();
 
     }
+
 
 }

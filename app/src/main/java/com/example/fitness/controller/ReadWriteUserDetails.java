@@ -1,4 +1,4 @@
-package com.example.fitness;
+package com.example.fitness.controller;
 
 public class ReadWriteUserDetails {
 

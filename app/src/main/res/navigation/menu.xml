@@ -7,7 +7,7 @@
 
     <activity
         android:id="@+id/userProfileActivity"
-        android:name="com.example.fitness.UserProfileActivity"
+        android:name="com.example.fitness.controller.UserProfileActivity"
         android:label="activity_user_profile"
         tools:layout="@layout/activity_user_profile" />
 </navigation>

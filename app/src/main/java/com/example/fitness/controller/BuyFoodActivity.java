@@ -1,10 +1,8 @@
-package com.example.fitness;
+package com.example.fitness.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -12,33 +10,17 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import com.example.fitness.R;
 import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.wallet.AutoResolveHelper;
-import com.google.android.gms.wallet.CardRequirements;
-import com.google.android.gms.wallet.IsReadyToPayRequest;
-import com.google.android.gms.wallet.PaymentData;
-import com.google.android.gms.wallet.PaymentDataRequest;
-import com.google.android.gms.wallet.PaymentMethodToken;
-import com.google.android.gms.wallet.PaymentMethodTokenizationParameters;
-import com.google.android.gms.wallet.PaymentsClient;
-import com.google.android.gms.wallet.TransactionInfo;
-import com.google.android.gms.wallet.Wallet;
-import com.google.android.gms.wallet.WalletConstants;
-import com.google.android.material.button.MaterialButton;
 
-import java.util.Arrays;
-import java.util.Date;
-
-public class BuySportActivity extends AppCompatActivity {
+public class BuyFoodActivity extends AppCompatActivity {
 
     private SignInButton button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_buy_sport);
+        setContentView(R.layout.activity_buy_food);
 
         button=findViewById(R.id.google_pay_button);
 
@@ -49,12 +31,11 @@ public class BuySportActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     private void showDialog() {
 
-        final Dialog dialog=new Dialog(BuySportActivity.this);
+        final Dialog dialog=new Dialog(BuyFoodActivity.this);
 
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
@@ -86,7 +67,7 @@ public class BuySportActivity extends AppCompatActivity {
 
     private void showAccepted() {
 
-        final Dialog dialog=new Dialog(BuySportActivity.this);
+        final Dialog dialog=new Dialog(BuyFoodActivity.this);
 
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
@@ -104,6 +85,5 @@ public class BuySportActivity extends AppCompatActivity {
         dialog.show();
 
     }
-
 
 }

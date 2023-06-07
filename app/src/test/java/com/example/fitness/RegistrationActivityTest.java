@@ -1,6 +1,5 @@
 package com.example.fitness;
 
-import android.content.Intent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -14,9 +13,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import com.google.firebase.auth.FirebaseAuth;
 
-import static org.junit.Assert.*;
+import com.example.fitness.controller.RegisterActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 @RunWith(JUnit4.class)
 public class RegistrationActivityTest {

@@ -1,4 +1,4 @@
-package com.example.fitness;
+package com.example.fitness.controller;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +12,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fitness.R;
 import com.example.fitness.model.NutritionData;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,7 +29,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-public class SupperActivity extends AppCompatActivity {
+public class BreakfastActivty extends AppCompatActivity {
 
     private EditText grams;
     private Spinner foodSpinner;
@@ -37,16 +38,17 @@ public class SupperActivity extends AppCompatActivity {
     private TextView txt_calories;
 
     DatabaseReference reference;
-    //List<Food> foodListArr;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_supper);
-        grams=findViewById(R.id.gramms_dinner);
+        setContentView(R.layout.activity_beakfast_activty);
+
+        grams=findViewById(R.id.gramms_breakfast);
         foodSpinner=findViewById(R.id.spinner_dinner);
         add=findViewById(R.id.add_dinner);
-        txt_calories=findViewById(R.id.show_calories_supper);
+        txt_calories=findViewById(R.id.show_calories_breakfast);
 
         reference= FirebaseDatabase.getInstance().getReference("Food");
 
@@ -63,7 +65,7 @@ public class SupperActivity extends AppCompatActivity {
                             }
 
                         }catch (DatabaseException e ){
-                            Toast.makeText(SupperActivity.this,e.getMessage(),Toast.LENGTH_LONG).show();
+                            Toast.makeText(BreakfastActivty.this,e.getMessage(),Toast.LENGTH_LONG).show();
                         }
 
                     }
@@ -76,7 +78,7 @@ public class SupperActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(SupperActivity.this,error.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(BreakfastActivty.this,error.getMessage(),Toast.LENGTH_LONG).show();
             }
         });
 
@@ -112,7 +114,7 @@ public class SupperActivity extends AppCompatActivity {
                                 txt_calories.setText("Calories "+ String.valueOf(nutritionData.getCalories()));
 
                             } catch (DatabaseException e ){
-                                Toast.makeText(SupperActivity.this,e.getMessage(),Toast.LENGTH_LONG).show();
+                                Toast.makeText(BreakfastActivty.this,e.getMessage(),Toast.LENGTH_LONG).show();
                             }
 
 
@@ -121,7 +123,7 @@ public class SupperActivity extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(SupperActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(BreakfastActivty.this, error.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
 
@@ -133,17 +135,17 @@ public class SupperActivity extends AppCompatActivity {
 
     private void writeNutritionDataToFirebase(NutritionData nutritionData) {
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Nutrition_data");
-        DatabaseReference nutritionDataRef = dbRef.child("Supper");
+        DatabaseReference nutritionDataRef = dbRef.child("Breakfast");
         String key = nutritionDataRef.push().getKey();
         nutritionDataRef.child(key).setValue(nutritionData).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
 
-                    Toast.makeText(SupperActivity.this,"Supper is added successfully!",
+                    Toast.makeText(BreakfastActivty.this,"Breakfast is added successfully!",
                             Toast.LENGTH_LONG).show();
 
-                    /*Intent intent=new Intent(SupperActivity.this,FoodActivity.class);
+                    /*Intent intent=new Intent(BreakfastActivty.this,FoodActivity.class);
 
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
                             | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -152,12 +154,11 @@ public class SupperActivity extends AppCompatActivity {
 
 
                 }else{
-                    Toast.makeText(SupperActivity.this,"Something went wrong!",
+                    Toast.makeText(BreakfastActivty.this,"Something went wrong!",
                             Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
-
 
 }

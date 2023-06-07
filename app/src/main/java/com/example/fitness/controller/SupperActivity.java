@@ -1,4 +1,4 @@
-package com.example.fitness;
+package com.example.fitness.controller;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +12,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fitness.R;
 import com.example.fitness.model.NutritionData;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,8 +29,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-public class AfternoonSnackActivity extends AppCompatActivity {
-
+public class SupperActivity extends AppCompatActivity {
 
     private EditText grams;
     private Spinner foodSpinner;
@@ -43,14 +43,11 @@ public class AfternoonSnackActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_afternoon_snack);
-
-        getSupportActionBar().setTitle("Food");
-
+        setContentView(R.layout.activity_supper);
         grams=findViewById(R.id.gramms_dinner);
         foodSpinner=findViewById(R.id.spinner_dinner);
         add=findViewById(R.id.add_dinner);
-        txt_calories=findViewById(R.id.show_calories_afternoon_snack);
+        txt_calories=findViewById(R.id.show_calories_supper);
 
         reference= FirebaseDatabase.getInstance().getReference("Food");
 
@@ -59,18 +56,18 @@ public class AfternoonSnackActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<String> foodList=new ArrayList<>();
                 if (snapshot.exists() && snapshot.getChildrenCount() > 0) {
-                for (DataSnapshot foodSnapShot:snapshot.getChildren()){
-                    try{
-                        HashMap<String, Object> data = (HashMap<String, Object>) foodSnapShot.getValue();
-                       for( String item : data.keySet()){
-                        foodList.add(item);
-                    }
+                    for (DataSnapshot foodSnapShot:snapshot.getChildren()){
+                        try{
+                            HashMap<String, Object> data = (HashMap<String, Object>) foodSnapShot.getValue();
+                            for( String item : data.keySet()){
+                                foodList.add(item);
+                            }
 
-                    }catch (DatabaseException e ){
-                        Toast.makeText(AfternoonSnackActivity.this,e.getMessage(),Toast.LENGTH_LONG).show();
-                    }
+                        }catch (DatabaseException e ){
+                            Toast.makeText(SupperActivity.this,e.getMessage(),Toast.LENGTH_LONG).show();
+                        }
 
-                }
+                    }
                 }
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, foodList);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -80,7 +77,7 @@ public class AfternoonSnackActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(AfternoonSnackActivity.this,error.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(SupperActivity.this,error.getMessage(),Toast.LENGTH_LONG).show();
             }
         });
 
@@ -108,17 +105,15 @@ public class AfternoonSnackActivity extends AppCompatActivity {
                                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                                 String dateString = dateFormat.format(currentDate);
 
-                               NutritionData nutritionData = new NutritionData(dateString, proteins, carbohydrates, calories, fats, txt_grams);
-                               nutritionData.calculateNutritionData(txt_grams,proteins,carbohydrates,calories,fats,dateString);
+                                NutritionData nutritionData = new NutritionData(dateString, proteins, carbohydrates, calories, fats, txt_grams);
+                                nutritionData.calculateNutritionData(txt_grams,proteins,carbohydrates,calories,fats,dateString);
 
-                               writeNutritionDataToFirebase(nutritionData);
+                                writeNutritionDataToFirebase(nutritionData);
 
-                               txt_calories.setText("Calories "+ String.valueOf(nutritionData.getCalories()));
-
-
+                                txt_calories.setText("Calories "+ String.valueOf(nutritionData.getCalories()));
 
                             } catch (DatabaseException e ){
-                                Toast.makeText(AfternoonSnackActivity.this,e.getMessage(),Toast.LENGTH_LONG).show();
+                                Toast.makeText(SupperActivity.this,e.getMessage(),Toast.LENGTH_LONG).show();
                             }
 
 
@@ -127,7 +122,7 @@ public class AfternoonSnackActivity extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(AfternoonSnackActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(SupperActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
 
@@ -137,21 +132,28 @@ public class AfternoonSnackActivity extends AppCompatActivity {
 
     }
 
-
     private void writeNutritionDataToFirebase(NutritionData nutritionData) {
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Nutrition_data");
-        DatabaseReference nutritionDataRef = dbRef.child("Afternoon_snack");
+        DatabaseReference nutritionDataRef = dbRef.child("Supper");
         String key = nutritionDataRef.push().getKey();
         nutritionDataRef.child(key).setValue(nutritionData).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
 
-                    Toast.makeText(AfternoonSnackActivity.this,"Afternoon snack is added successfully!",
+                    Toast.makeText(SupperActivity.this,"Supper is added successfully!",
                             Toast.LENGTH_LONG).show();
 
+                    /*Intent intent=new Intent(SupperActivity.this,FoodActivity.class);
+
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish(); // to close Activity*/
+
+
                 }else{
-                    Toast.makeText(AfternoonSnackActivity.this,"Something went wrong!",
+                    Toast.makeText(SupperActivity.this,"Something went wrong!",
                             Toast.LENGTH_LONG).show();
                 }
             }
