@@ -19,84 +19,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_menu" />
 
+
     <TextView
         android:id="@+id/textView32"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Next links can help you :"
+        android:textColor="#D53E3E"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.463"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.024"
-        android:textColor="#D53E3E"/>
-
-    <TextView
-        android:id="@+id/ChloeTing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="TextView"
-        android:textColor="#050505"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView32" />
-
-    <TextView
-        android:id="@+id/textViewBrad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:text="TextView"
-        android:textColor="#050505"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ChloeTing" />
-
-    <TextView
-        android:id="@+id/textViewMatt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
-        android:text="TextView"
-        android:textColor="#050505"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.07"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewBrad" />
-
-    <TextView
-        android:id="@+id/textViewEmma"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
-        android:text="TextView"
-        android:textColor="#050505"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.07"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewMatt" />
-
-    <TextView
-        android:id="@+id/textViewgymHelp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
-        android:text="TextView"
-        android:textColor="#050505"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.07"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewEmma" />
+        app:layout_constraintVertical_bias="0.823" />
 
     <Button
         android:id="@+id/buttonBuySport"
         android:layout_width="107dp"
         android:layout_height="56dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="28dp"
         android:backgroundTint="#B22222"
         android:text="Exercise/Sport"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationBar"
@@ -109,101 +51,14 @@
         android:id="@+id/buttonBuyFood"
         android:layout_width="118dp"
         android:layout_height="59dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="600dp"
         android:backgroundTint="#B22222"
         android:text="Food/Nutrition"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.759"
+        app:layout_constraintHorizontal_bias="0.683"
         app:layout_constraintStart_toEndOf="@+id/buttonBuySport"
-        app:layout_constraintTop_toBottomOf="@+id/textView38"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TouchTargetSizeCheck" />
 
-    <TextView
-        android:id="@+id/textView38"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text="You can buy instructions by our trainers"
-        android:textColor="#D53E3E"
-        app:layout_constraintBottom_toTopOf="@+id/buttonBuySport"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewgymHelp"
-        app:layout_constraintVertical_bias="0.735" />
-
-    <TextView
-        android:id="@+id/textView49"
-        android:layout_width="392dp"
-        android:layout_height="78dp"
-        android:layout_marginTop="5dp"
-        android:text="Brad Schoenfeld considered one of greatest trainers of all time is a respected trainer, author and professor of exercise science who specialises in the science of bodybuilding and nutritionso he's often referred to as the gym trainer for men."
-        android:textAlignment="center"
-        android:textColor="#040404"
-        app:layout_constraintBottom_toTopOf="@+id/textViewMatt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewBrad"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/textView50"
-        android:layout_width="390dp"
-        android:layout_height="89dp"
-        android:layout_marginTop="3dp"
-        android:layout_marginBottom="3dp"
-        android:text="Matt trains a roster of celebrity clients, is a published author and has his own brand of fitness clothing. But despite this borderline celebrity trainer status, he remains grounded. He knows that working with regular people and helping them to achieve the results they’re looking for is what gets referrals."
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="#050505"
-        app:layout_constraintBottom_toTopOf="@+id/textViewEmma"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.476"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewMatt"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/textView51"
-        android:layout_width="398dp"
-        android:layout_height="83dp"
-        android:text="Emma Chan is based at Coastal Fitness in Hong Kong. She's a health and performance specialist with a background in competitive volleyball. Emma works with both end of the athlete spectrum, people who are completely new to fitness and athletes who want to improve their performance."
-        android:textAlignment="center"
-        android:textColor="#040404"
-        app:layout_constraintBottom_toTopOf="@+id/textViewgymHelp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.692"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewEmma"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/textView52"
-        android:layout_width="399dp"
-        android:layout_height="49dp"
-        android:text="Me.Gym is a fitness web page  to help you plan a workout programme according to your data and preferences"
-        android:textAlignment="center"
-        android:textColor="#090909"
-        app:layout_constraintBottom_toTopOf="@+id/textView38"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewgymHelp"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/textView53"
-        android:layout_width="401dp"
-        android:layout_height="72dp"
-        android:text="Chloe is a leading fitness creator on YouTube with over 24M subscribers. Her goal is to make health and fitness accessible to all by providing free workout programs and sharing free recipes with her audience."
-        android:textAlignment="center"
-        android:textColor="#090909"
-        app:layout_constraintBottom_toTopOf="@+id/textViewBrad"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ChloeTing"
-        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
