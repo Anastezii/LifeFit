@@ -21,6 +21,21 @@
 
 
     <TextView
+        android:id="@+id/show_calories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.175"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.067" />
+
+    <TextView
         android:id="@+id/textView32"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,21 +58,21 @@
         android:text="Exercise/Sport"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationBar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewgymHelp"
-        app:layout_constraintVertical_bias="0.859"
+        app:layout_constraintTop_toBottomOf="@+id/textView32"
+        app:layout_constraintVertical_bias="1.0"
         tools:ignore="TouchTargetSizeCheck" />
 
     <Button
         android:id="@+id/buttonBuyFood"
         android:layout_width="118dp"
         android:layout_height="59dp"
-        android:layout_marginTop="600dp"
+        android:layout_marginTop="28dp"
         android:backgroundTint="#B22222"
         android:text="Food/Nutrition"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.683"
+        app:layout_constraintHorizontal_bias="0.689"
         app:layout_constraintStart_toEndOf="@+id/buttonBuySport"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView32"
         tools:ignore="TouchTargetSizeCheck" />
 
 

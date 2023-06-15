@@ -14,16 +14,34 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fitness.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseException;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 
 public class CaloriesActivity extends AppCompatActivity {
 
     private Button food,sport;
+    private TextView txt_calories;
+    DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +50,39 @@ public class CaloriesActivity extends AppCompatActivity {
 
         food=findViewById(R.id.buttonBuyFood);
         sport=findViewById(R.id.buttonBuySport);
+        txt_calories=findViewById(R.id.show_calories);
+
+        reference= FirebaseDatabase.getInstance().getReference("Nutrition_data");
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for (DataSnapshot category: snapshot.getChildren()){
+                    for( DataSnapshot entry : category.getChildren()){
+
+                        String date = entry.child("date").getValue(String.class);
+
+                        Date currentDate = new Date();
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                        String dateString = dateFormat.format(currentDate);
+
+                        if (dateString.equals(date)){
+
+                            txt_calories.setText("Calories ");
+
+                        }
+
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(CaloriesActivity.this,error.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
 
 
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottomNavigationBar);
