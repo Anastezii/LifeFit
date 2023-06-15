@@ -71,7 +71,38 @@ public class CaloriesActivity extends AppCompatActivity {
 
                             Double calories=entry.child("calories").getValue(Double.class);
 
-                            txt_calories.setText("Calories "+ calories);
+                           FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
+                            FirebaseUser firebaseUser=firebaseAuth.getCurrentUser();
+
+                            if (firebaseUser==null){
+                                Toast.makeText(CaloriesActivity.this,"Something went wrong!",Toast.LENGTH_LONG).show();
+                            }else {
+                                String userID=firebaseUser.getUid();
+
+                                //extracting user reference fro db for registered user
+                                DatabaseReference reference= FirebaseDatabase.getInstance().getReference("Registered User");
+                                reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                                        HashMap<String, Object> food = (HashMap<String, Object>) snapshot.getValue();
+                                        Double total_calories=Double.parseDouble(food.get("calories").toString());
+
+                                        txt_calories.setText("Calories "+ calories + "/" + total_calories);
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        Toast.makeText(CaloriesActivity.this,"Something went wrong!",Toast.LENGTH_LONG).show();
+                                    }
+                                });
+
+
+
+                            }
+
+
 
                         }
 
