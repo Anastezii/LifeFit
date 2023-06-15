@@ -137,7 +137,7 @@ public class SupperActivity extends AppCompatActivity {
     private void writeNutritionDataToFirebase(NutritionDataService nutritionData) {
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Nutrition_data");
         DatabaseReference nutritionDataRef = dbRef.child("Supper");
-        String key = nutritionDataRef.push().getKey();
+        String key = "Supper";
         nutritionDataRef.child(key).setValue(nutritionData).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
