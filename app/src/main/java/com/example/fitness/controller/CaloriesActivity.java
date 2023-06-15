@@ -69,7 +69,9 @@ public class CaloriesActivity extends AppCompatActivity {
 
                         if (dateString.equals(date)){
 
-                            txt_calories.setText("Calories ");
+                            Double calories=entry.child("calories").getValue(Double.class);
+
+                            txt_calories.setText("Calories "+ calories);
 
                         }
 
