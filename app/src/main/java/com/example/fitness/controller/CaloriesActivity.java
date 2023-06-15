@@ -18,8 +18,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.google.android.gms.common.Scopes;
+import com.google.android.gms.common.api.Scope;
+import com.google.android.gms.fitness.Fitness;
+import com.google.android.gms.fitness.FitnessOptions;
 
 import com.example.fitness.R;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -42,6 +48,7 @@ public class CaloriesActivity extends AppCompatActivity {
     private Button food,sport;
     private TextView txt_calories;
     DatabaseReference reference;
+    private GoogleApiClient googleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,11 +105,7 @@ public class CaloriesActivity extends AppCompatActivity {
                                     }
                                 });
 
-
-
                             }
-
-
 
                         }
 
@@ -116,6 +119,36 @@ public class CaloriesActivity extends AppCompatActivity {
                 Toast.makeText(CaloriesActivity.this,error.getMessage(),Toast.LENGTH_LONG).show();
             }
         });
+
+        /*GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .requestScopes(new Scope(Scopes.FITNESS_ACTIVITY_READ_WRITE))
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .build();*/
+
+       /* googleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(Fitness.RECORDING_API)
+                .addApi(Fitness.HISTORY_API)
+                .addApi(Fitness.SESSIONS_API)
+                .addScope(new Scope(Scopes.FITNESS_ACTIVITY_READ_WRITE))
+                .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
+                    @Override
+                    public void onConnected(Bundle bundle) {
+                        // Google Fit API connected
+                    }
+
+                    @Override
+                    public void onConnectionSuspended(int i) {
+                        if (i == GoogleApiClient.ConnectionCallbacks.CAUSE_NETWORK_LOST) {
+                            // Handle connection suspension due to lost network
+                        } else if (i == GoogleApiClient.ConnectionCallbacks.CAUSE_SERVICE_DISCONNECTED) {
+                            // Handle connection suspension due to service disconnection
+                        }
+                    }
+                })
+                .build();*/
+
+        googleApiClient.connect();
 
 
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottomNavigationBar);
