@@ -48,7 +48,9 @@ public class CaloriesActivity extends AppCompatActivity {
     private Button food,sport;
     private TextView txt_calories;
     DatabaseReference reference;
-    private GoogleApiClient googleApiClient;
+    DatabaseReference referenceSport;
+   // private GoogleApiClient googleApiClient;
+   Double calories_sport;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +62,13 @@ public class CaloriesActivity extends AppCompatActivity {
         txt_calories=findViewById(R.id.show_calories);
 
         reference= FirebaseDatabase.getInstance().getReference("Nutrition_data");
+        referenceSport=FirebaseDatabase.getInstance().getReference("Sport_data");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                Double calories_total = 0.0 ;
 
                 for (DataSnapshot category: snapshot.getChildren()){
                     for( DataSnapshot entry : category.getChildren()){
@@ -76,41 +81,17 @@ public class CaloriesActivity extends AppCompatActivity {
 
                         if (dateString.equals(date)){
 
-                            Double calories=entry.child("calories").getValue(Double.class);
-
-                           FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
-                            FirebaseUser firebaseUser=firebaseAuth.getCurrentUser();
-
-                            if (firebaseUser==null){
-                                Toast.makeText(CaloriesActivity.this,"Something went wrong!",Toast.LENGTH_LONG).show();
-                            }else {
-                                String userID=firebaseUser.getUid();
-
-                                //extracting user reference fro db for registered user
-                                DatabaseReference reference= FirebaseDatabase.getInstance().getReference("Registered User");
-                                reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                                        HashMap<String, Object> food = (HashMap<String, Object>) snapshot.getValue();
-                                        Double total_calories=Double.parseDouble(food.get("calories").toString());
-
-                                        txt_calories.setText("Calories "+ calories + "/" + total_calories);
-
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-                                        Toast.makeText(CaloriesActivity.this,"Something went wrong!",Toast.LENGTH_LONG).show();
-                                    }
-                                });
-
+                            Double caloriesDouble = entry.child("calories").getValue(Double.class);
+                            if (caloriesDouble != null) {
+                                calories_total += caloriesDouble;
                             }
 
                         }
 
                     }
                 }
+
+                retrieveSportData(calories_total);
 
             }
 
@@ -120,35 +101,33 @@ public class CaloriesActivity extends AppCompatActivity {
             }
         });
 
-        /*GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .requestScopes(new Scope(Scopes.FITNESS_ACTIVITY_READ_WRITE))
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .build();*/
+        /*
 
-       /* googleApiClient = new GoogleApiClient.Builder(this)
-                .addApi(Fitness.RECORDING_API)
-                .addApi(Fitness.HISTORY_API)
-                .addApi(Fitness.SESSIONS_API)
-                .addScope(new Scope(Scopes.FITNESS_ACTIVITY_READ_WRITE))
-                .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
-                    @Override
-                    public void onConnected(Bundle bundle) {
-                        // Google Fit API connected
-                    }
+         //extracting user reference fro db for registered user
+                                DatabaseReference referenceUser= FirebaseDatabase.getInstance().getReference("Registered User");
+                                referenceUser.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                    @Override
-                    public void onConnectionSuspended(int i) {
-                        if (i == GoogleApiClient.ConnectionCallbacks.CAUSE_NETWORK_LOST) {
-                            // Handle connection suspension due to lost network
-                        } else if (i == GoogleApiClient.ConnectionCallbacks.CAUSE_SERVICE_DISCONNECTED) {
-                            // Handle connection suspension due to service disconnection
-                        }
-                    }
-                })
-                .build();*/
+                                        HashMap<String, Object> food = (HashMap<String, Object>) snapshot.getValue();
+                                        Double total_calories = Double.parseDouble(food.get("calories").toString());
 
-        googleApiClient.connect();
+                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+                                                Toast.makeText(CaloriesActivity.this,"Something went wrong!",Toast.LENGTH_LONG).show();
+                                            }
+                                        });
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        Toast.makeText(CaloriesActivity.this,"Something went wrong!",Toast.LENGTH_LONG).show();
+                                    }
+                                });*/
 
 
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottomNavigationBar);
@@ -199,4 +178,56 @@ public class CaloriesActivity extends AppCompatActivity {
 
 
     }
+
+    private void retrieveSportData(final Double calories_total) {
+
+        referenceSport.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                double subtractedCalories = 0;
+
+                for (DataSnapshot entrySnapshot : snapshot.getChildren()) {
+                    Double caloriesDouble = entrySnapshot.child("calories").getValue(Double.class);
+                    if (caloriesDouble != null) {
+                        subtractedCalories += caloriesDouble;
+                    }
+                }
+
+                double remainingCalories = calories_total - subtractedCalories;
+
+                FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
+                FirebaseUser firebaseUser=firebaseAuth.getCurrentUser();
+
+                if (firebaseUser==null){
+                    Toast.makeText(CaloriesActivity.this,"Something went wrong!",Toast.LENGTH_LONG).show();
+                }else {
+                    DatabaseReference referenceUser= FirebaseDatabase.getInstance().getReference("Registered User");
+                    referenceUser.child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                            HashMap<String, Object> food = (HashMap<String, Object>) snapshot.getValue();
+                            Double total_calories = Double.parseDouble(food.get("calories").toString());
+
+                            txt_calories.setText("Calories "+ remainingCalories+ "/"+total_calories);
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            Toast.makeText(CaloriesActivity.this,error.getMessage(),Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(CaloriesActivity.this,error.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
 }
