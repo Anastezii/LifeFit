@@ -50,7 +50,6 @@ public class CaloriesActivity extends AppCompatActivity {
     DatabaseReference reference;
     DatabaseReference referenceSport;
    // private GoogleApiClient googleApiClient;
-   Double calories_sport;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,35 +99,6 @@ public class CaloriesActivity extends AppCompatActivity {
                 Toast.makeText(CaloriesActivity.this,error.getMessage(),Toast.LENGTH_LONG).show();
             }
         });
-
-        /*
-
-         //extracting user reference fro db for registered user
-                                DatabaseReference referenceUser= FirebaseDatabase.getInstance().getReference("Registered User");
-                                referenceUser.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                                        HashMap<String, Object> food = (HashMap<String, Object>) snapshot.getValue();
-                                        Double total_calories = Double.parseDouble(food.get("calories").toString());
-
-                                }
-                                            }
-
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError error) {
-                                                Toast.makeText(CaloriesActivity.this,"Something went wrong!",Toast.LENGTH_LONG).show();
-                                            }
-                                        });
-
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-                                        Toast.makeText(CaloriesActivity.this,"Something went wrong!",Toast.LENGTH_LONG).show();
-                                    }
-                                });*/
-
 
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottomNavigationBar);
         bottomNavigationView.setSelectedItemId(R.id.bottom_home);
