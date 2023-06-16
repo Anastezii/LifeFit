@@ -23,6 +23,11 @@ import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.fitness.Fitness;
 import com.google.android.gms.fitness.FitnessOptions;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+
 import com.example.fitness.R;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -49,12 +54,50 @@ public class CaloriesActivity extends AppCompatActivity {
     private TextView txt_calories;
     DatabaseReference reference;
     DatabaseReference referenceSport;
-   // private GoogleApiClient googleApiClient;
+    private GoogleApiClient googleApiClient;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calories);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+
+        // Configure Google Fit API
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .requestScopes(new Scope("https://www.googleapis.com/auth/fitness.activity.read"))
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .build();
+
+        googleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(Fitness.RECORDING_API)
+                .addApi(Fitness.HISTORY_API)
+                .addApi(Fitness.SESSIONS_API)
+                .addScope(new Scope("https://www.googleapis.com/auth/fitness.activity.read"))
+                .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
+                    @Override
+                    public void onConnected(Bundle bundle) {
+                        // Google Fit API connected
+                    }
+
+                    @Override
+                    public void onConnectionSuspended(int i) {
+                        if (i == GoogleApiClient.ConnectionCallbacks.CAUSE_NETWORK_LOST) {
+                            // Handle connection suspension due to lost network
+                        } else if (i == GoogleApiClient.ConnectionCallbacks.CAUSE_SERVICE_DISCONNECTED) {
+                            // Handle connection suspension due to service disconnection
+                        }
+                    }
+                })
+                .build();
+
+        googleApiClient.connect();
 
         food=findViewById(R.id.buttonBuyFood);
         sport=findViewById(R.id.buttonBuySport);
@@ -158,10 +201,21 @@ public class CaloriesActivity extends AppCompatActivity {
                 double subtractedCalories = 0;
 
                 for (DataSnapshot entrySnapshot : snapshot.getChildren()) {
-                    Double caloriesDouble = entrySnapshot.child("calories").getValue(Double.class);
-                    if (caloriesDouble != null) {
-                        subtractedCalories += caloriesDouble;
+
+                    String date = entrySnapshot.child("date").getValue(String.class);
+
+                    Date currentDate = new Date();
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                    String dateString = dateFormat.format(currentDate);
+
+                    if (date.equals(dateString)){
+
+                        Double caloriesDouble = entrySnapshot.child("calories").getValue(Double.class);
+                        if (caloriesDouble != null) {
+                            subtractedCalories += caloriesDouble;
+                        }
                     }
+
                 }
 
                 double remainingCalories = calories_total - subtractedCalories;
@@ -178,10 +232,10 @@ public class CaloriesActivity extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                             HashMap<String, Object> food = (HashMap<String, Object>) snapshot.getValue();
-                            Double total_calories = Double.parseDouble(food.get("calories").toString());
 
-                            txt_calories.setText("Calories "+ remainingCalories+ "/"+total_calories);
+                                Double total_calories = Double.parseDouble(food.get("calories").toString());
 
+                                txt_calories.setText("Calories "+ remainingCalories+ "/"+total_calories);
                         }
 
                         @Override
@@ -198,6 +252,12 @@ public class CaloriesActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        googleApiClient.disconnect();
     }
 
 }
