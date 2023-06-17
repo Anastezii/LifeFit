@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.common.Scopes;
@@ -54,10 +55,11 @@ public class CaloriesActivity extends AppCompatActivity {
     private TextView txt_calories;
     DatabaseReference reference;
     DatabaseReference referenceSport;
-    private GoogleApiClient googleApiClient;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
+    private ProgressBar progressBar;
+    private TextView progressText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,36 +70,8 @@ public class CaloriesActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
 
-        // Configure Google Fit API
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .requestScopes(new Scope("https://www.googleapis.com/auth/fitness.activity.read"))
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .build();
-
-        googleApiClient = new GoogleApiClient.Builder(this)
-                .addApi(Fitness.RECORDING_API)
-                .addApi(Fitness.HISTORY_API)
-                .addApi(Fitness.SESSIONS_API)
-                .addScope(new Scope("https://www.googleapis.com/auth/fitness.activity.read"))
-                .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
-                    @Override
-                    public void onConnected(Bundle bundle) {
-                        // Google Fit API connected
-                    }
-
-                    @Override
-                    public void onConnectionSuspended(int i) {
-                        if (i == GoogleApiClient.ConnectionCallbacks.CAUSE_NETWORK_LOST) {
-                            // Handle connection suspension due to lost network
-                        } else if (i == GoogleApiClient.ConnectionCallbacks.CAUSE_SERVICE_DISCONNECTED) {
-                            // Handle connection suspension due to service disconnection
-                        }
-                    }
-                })
-                .build();
-
-        googleApiClient.connect();
+        progressBar = findViewById(R.id.progressBar);
+        progressText=findViewById(R.id.progress_text);
 
         food=findViewById(R.id.buttonBuyFood);
         sport=findViewById(R.id.buttonBuySport);
@@ -233,9 +207,35 @@ public class CaloriesActivity extends AppCompatActivity {
 
                             HashMap<String, Object> food = (HashMap<String, Object>) snapshot.getValue();
 
-                                Double total_calories = Double.parseDouble(food.get("calories").toString());
+                            Double total_calories = Double.parseDouble(food.get("calories").toString());
 
-                                txt_calories.setText("Calories "+ remainingCalories+ "/"+total_calories);
+                            txt_calories.setText("Calories " + remainingCalories + "/" + total_calories);
+
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            int value = (int) Double.parseDouble(String.valueOf(remainingCalories));
+                                            int value_2 = (int) Double.parseDouble(String.valueOf(total_calories));
+
+
+                                            int progress = (value * 100) / value_2;
+                                            progressText.setText("" + value);
+                                            progressBar.setProgress(progress);
+                                        }
+                                    });
+
+                                    try {
+                                        Thread.sleep(100);
+                                    }catch (InterruptedException e){
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }).start();
+
+
                         }
 
                         @Override
@@ -252,12 +252,6 @@ public class CaloriesActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        googleApiClient.disconnect();
     }
 
 }

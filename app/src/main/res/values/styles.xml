@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="CircularProgressBarStyle" parent="android:Widget.ProgressBar">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:indeterminateDrawable">@drawable/circular_progress_bar</item>
+    </style>
+
+
+</resources>
