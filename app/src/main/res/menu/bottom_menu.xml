@@ -26,4 +26,10 @@
         android:iconTint="#D82F2F"
         android:title="Calories" />
 
+    <item
+        android:id="@+id/bottom_exercises"
+        android:icon="@drawable/exercise"
+        android:iconTint="#D82F2F"
+        android:title="Exercise" />
+
 </menu>

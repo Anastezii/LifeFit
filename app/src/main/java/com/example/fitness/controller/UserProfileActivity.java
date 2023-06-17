@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fitness.R;
+import com.example.fitness.model.ReadWriteUserDetails;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -64,6 +65,11 @@ public class UserProfileActivity extends AppCompatActivity {
                         overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                         finish();
                        return;
+                    case R.id.bottom_exercises:
+                        startActivity(new Intent(getApplicationContext(), ExercisesActivity.class));
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        finish();
+                        return;
                 }
                 return;
             }

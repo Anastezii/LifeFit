@@ -139,6 +139,10 @@ public class CaloriesActivity extends AppCompatActivity {
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         finish();
                         return;
+                    case R.id.bottom_exercises:
+                        startActivity(new Intent(getApplicationContext(), ExercisesActivity.class));
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        finish();
                     case R.id.bottom_calories:
                         return;
                 }
