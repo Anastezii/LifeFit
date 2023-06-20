@@ -4,7 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -50,7 +55,7 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class CaloriesActivity extends AppCompatActivity {
+public class CaloriesActivity extends AppCompatActivity implements SensorEventListener {
 
     private Button food,sport;
     private TextView txt_calories;
@@ -61,6 +66,10 @@ public class CaloriesActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private ProgressBar progressBar;
     private TextView progressText;
+
+    private SensorManager sensorManager;
+    private TextView count;
+    boolean activityRunning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +86,10 @@ public class CaloriesActivity extends AppCompatActivity {
         food=findViewById(R.id.buttonBuyFood);
         sport=findViewById(R.id.buttonBuySport);
         txt_calories=findViewById(R.id.show_calories);
+
+        count = (TextView) findViewById(R.id.steps);
+
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
         reference= FirebaseDatabase.getInstance().getReference("Nutrition_data");
         referenceSport=FirebaseDatabase.getInstance().getReference("Sport_data");
@@ -284,6 +297,32 @@ public class CaloriesActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        activityRunning = true;
+        Sensor countSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+        if (countSensor != null) {
+            sensorManager.registerListener(this, countSensor, SensorManager.SENSOR_DELAY_UI);
+        } else {
+            Toast.makeText(this, "Count sensor not available!", Toast.LENGTH_LONG).show();
+        }
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        activityRunning = false;
+    }
 
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if (activityRunning) {
+            count.setText(String.valueOf(event.values[0]));
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    }
 }
