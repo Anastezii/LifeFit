@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
@@ -20,8 +21,11 @@ import android.text.style.ClickableSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,10 +58,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-
 public class CaloriesActivity extends AppCompatActivity implements SensorEventListener {
 
-    private Button food,sport;
+    private Button food,sport,add_steps;
     private TextView txt_calories;
     DatabaseReference reference;
     DatabaseReference referenceSport;
@@ -82,6 +85,7 @@ public class CaloriesActivity extends AppCompatActivity implements SensorEventLi
 
         progressBar = findViewById(R.id.progressBar);
         progressText=findViewById(R.id.progress_text);
+        add_steps=findViewById(R.id.buttonSteps);
 
         food=findViewById(R.id.buttonBuyFood);
         sport=findViewById(R.id.buttonBuySport);
@@ -306,8 +310,43 @@ public class CaloriesActivity extends AppCompatActivity implements SensorEventLi
             sensorManager.registerListener(this, countSensor, SensorManager.SENSOR_DELAY_UI);
         } else {
             Toast.makeText(this, "Count sensor not available!", Toast.LENGTH_LONG).show();
+            count.setText("Your device does not support Sensor, so you can enter the data yourself. To do this, press the Write data button bellow");
+            add_steps.setVisibility(View.VISIBLE);
+            add_steps.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showdialog();
+                }
+            });
         }
     }
+
+    private void showdialog() {
+
+        final Dialog dialog=new Dialog(CaloriesActivity.this);
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.add_steps);
+
+        final EditText count_steps=dialog.findViewById(R.id.count_steps);
+        Button writeButton=dialog.findViewById(R.id.write_count);
+
+        writeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String steps_number=count_steps.getText().toString();
+                count.setText("Your count of steps is : "+steps_number + "/"+"10 000");
+                dialog.dismiss();
+
+            }
+        });
+
+        dialog.show();
+    }
+
+
 
     @Override
     protected void onPause() {
