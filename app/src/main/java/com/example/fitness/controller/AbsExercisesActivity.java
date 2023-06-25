@@ -71,9 +71,28 @@ public class AbsExercisesActivity extends AppCompatActivity {
                 String selectedItem = itemList.get(position);
 
                 // Создайте Intent для открытия новой активности
-                Intent intent = new Intent(AbsExercisesActivity.this, CaloriesActivity.class);
-                intent.putExtra("selectedItem", selectedItem);
-                startActivity(intent);
+                if (selectedItem.equals("Bicycle Crunches") && selectedItem!=null){
+                    Intent intent = new Intent(AbsExercisesActivity.this, BicycleCrunchesActivity.class);
+                    intent.putExtra("selectedItem", selectedItem);
+                    startActivity(intent);
+                }else if (selectedItem.equals("Crunches") && selectedItem!=null){
+                    Intent intent = new Intent(AbsExercisesActivity.this, CrunchesActivity.class);
+                    intent.putExtra("selectedItem", selectedItem);
+                    startActivity(intent);
+                }else if(selectedItem.equals("Leg Raises") && selectedItem!=null){
+                    Intent intent = new Intent(AbsExercisesActivity.this, LegRaisesActivity.class);
+                    intent.putExtra("selectedItem", selectedItem);
+                    startActivity(intent);
+                }else if(selectedItem.equals("Plank") && selectedItem!=null){
+                    Intent intent = new Intent(AbsExercisesActivity.this, PlankActivity.class);
+                    intent.putExtra("selectedItem", selectedItem);
+                    startActivity(intent);
+                }else if(selectedItem.equals("Russian Twists") && selectedItem!=null){
+                    Intent intent = new Intent(AbsExercisesActivity.this, RussianTwistsActivity.class);
+                    intent.putExtra("selectedItem", selectedItem);
+                    startActivity(intent);
+                }
+
             }
         });
 

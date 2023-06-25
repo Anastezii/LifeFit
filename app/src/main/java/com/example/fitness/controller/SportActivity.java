@@ -178,9 +178,9 @@ public class SportActivity extends AppCompatActivity {
     }
 
     private void writeNutritionDataToFirebase(SportDataService sportData) {
-
+        String selectedSport = sportSpinner.getSelectedItem().toString();
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Sport_data");
-        String key = dbRef.push().getKey();
+        String key =selectedSport;
         dbRef.child(key).setValue(sportData).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
