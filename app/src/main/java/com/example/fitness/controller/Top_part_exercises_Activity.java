@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.HttpAuthHandler;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -23,6 +24,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import okhttp3.internal.http2.Huffman;
 
 public class Top_part_exercises_Activity extends AppCompatActivity {
 
@@ -77,24 +80,24 @@ public class Top_part_exercises_Activity extends AppCompatActivity {
                 String selectedItem = itemList.get(position);
 
                 // Создайте Intent для открытия новой активности
-                if (selectedItem.equals("Bicycle Crunches") && selectedItem!=null){
-                    Intent intent = new Intent(Top_part_exercises_Activity.this, BicycleCrunchesActivity.class);
+                if (selectedItem.equals("Bicep Curls") && selectedItem!=null){
+                    Intent intent = new Intent(Top_part_exercises_Activity.this, BicepCurlsActivity.class);
                     intent.putExtra("selectedItem", selectedItem);
                     startActivity(intent);
-                }else if (selectedItem.equals("Crunches") && selectedItem!=null){
-                    Intent intent = new Intent(Top_part_exercises_Activity.this, CrunchesActivity.class);
+                }else if (selectedItem.equals("Hammer Curls") && selectedItem!=null){
+                    Intent intent = new Intent(Top_part_exercises_Activity.this, HammerCurlsActivity.class);
                     intent.putExtra("selectedItem", selectedItem);
                     startActivity(intent);
-                }else if(selectedItem.equals("Leg Raises") && selectedItem!=null){
-                    Intent intent = new Intent(Top_part_exercises_Activity.this, LegRaisesActivity.class);
+                }else if(selectedItem.equals("Push-Ups") && selectedItem!=null){
+                    Intent intent = new Intent(Top_part_exercises_Activity.this, Push_UpsActivity.class);
                     intent.putExtra("selectedItem", selectedItem);
                     startActivity(intent);
-                }else if(selectedItem.equals("Plank") && selectedItem!=null){
-                    Intent intent = new Intent(Top_part_exercises_Activity.this, PlankActivity.class);
+                }else if(selectedItem.equals("Tricep Dips") && selectedItem!=null){
+                    Intent intent = new Intent(Top_part_exercises_Activity.this, TricepDipsActivity.class);
                     intent.putExtra("selectedItem", selectedItem);
                     startActivity(intent);
-                }else if(selectedItem.equals("Russian Twists") && selectedItem!=null){
-                    Intent intent = new Intent(Top_part_exercises_Activity.this, RussianTwistsActivity.class);
+                }else if(selectedItem.equals("Tricep Kickbacks") && selectedItem!=null){
+                    Intent intent = new Intent(Top_part_exercises_Activity.this, TricepKickbacksActivity.class);
                     intent.putExtra("selectedItem", selectedItem);
                     startActivity(intent);
                 }
@@ -169,27 +172,28 @@ public class Top_part_exercises_Activity extends AppCompatActivity {
                 String selectedItem = itemList.get(position);
 
                 // Создайте Intent для открытия новой активности
-                if (selectedItem.equals("Bicycle Crunches") && selectedItem!=null){
-                    Intent intent = new Intent(Top_part_exercises_Activity.this, BicycleCrunchesActivity.class);
+                if (selectedItem.equals("Bicep Curls") && selectedItem!=null){
+                    Intent intent = new Intent(Top_part_exercises_Activity.this, BicepCurlsActivity.class);
                     intent.putExtra("selectedItem", selectedItem);
                     startActivity(intent);
-                }else if (selectedItem.equals("Crunches") && selectedItem!=null){
-                    Intent intent = new Intent(Top_part_exercises_Activity.this, CrunchesActivity.class);
+                }else if (selectedItem.equals("Hammer Curls") && selectedItem!=null){
+                    Intent intent = new Intent(Top_part_exercises_Activity.this, HammerCurlsActivity.class);
                     intent.putExtra("selectedItem", selectedItem);
                     startActivity(intent);
-                }else if(selectedItem.equals("Leg Raises") && selectedItem!=null){
-                    Intent intent = new Intent(Top_part_exercises_Activity.this, LegRaisesActivity.class);
+                }else if(selectedItem.equals("Push-Ups") && selectedItem!=null){
+                    Intent intent = new Intent(Top_part_exercises_Activity.this, Push_UpsActivity.class);
                     intent.putExtra("selectedItem", selectedItem);
                     startActivity(intent);
-                }else if(selectedItem.equals("Plank") && selectedItem!=null){
-                    Intent intent = new Intent(Top_part_exercises_Activity.this, PlankActivity.class);
+                }else if(selectedItem.equals("Tricep Dips") && selectedItem!=null){
+                    Intent intent = new Intent(Top_part_exercises_Activity.this, TricepDipsActivity.class);
                     intent.putExtra("selectedItem", selectedItem);
                     startActivity(intent);
-                }else if(selectedItem.equals("Russian Twists") && selectedItem!=null){
-                    Intent intent = new Intent(Top_part_exercises_Activity.this, RussianTwistsActivity.class);
+                }else if(selectedItem.equals("Tricep Kickbacks") && selectedItem!=null){
+                    Intent intent = new Intent(Top_part_exercises_Activity.this, TricepKickbacksActivity.class);
                     intent.putExtra("selectedItem", selectedItem);
                     startActivity(intent);
                 }
+
 
             }
         });
@@ -237,24 +241,24 @@ public class Top_part_exercises_Activity extends AppCompatActivity {
                 String selectedItem = itemList.get(position);
 
                 // Создайте Intent для открытия новой активности
-                if (selectedItem.equals("Bicycle Crunches") && selectedItem!=null){
-                    Intent intent = new Intent(Top_part_exercises_Activity.this, BicycleCrunchesActivity.class);
+                if (selectedItem.equals("Bicep Curls") && selectedItem!=null){
+                    Intent intent = new Intent(Top_part_exercises_Activity.this, BicepCurlsActivity.class);
                     intent.putExtra("selectedItem", selectedItem);
                     startActivity(intent);
-                }else if (selectedItem.equals("Crunches") && selectedItem!=null){
-                    Intent intent = new Intent(Top_part_exercises_Activity.this, CrunchesActivity.class);
+                }else if (selectedItem.equals("Hammer Curls") && selectedItem!=null){
+                    Intent intent = new Intent(Top_part_exercises_Activity.this, HammerCurlsActivity.class);
                     intent.putExtra("selectedItem", selectedItem);
                     startActivity(intent);
-                }else if(selectedItem.equals("Leg Raises") && selectedItem!=null){
-                    Intent intent = new Intent(Top_part_exercises_Activity.this, LegRaisesActivity.class);
+                }else if(selectedItem.equals("Push-Ups") && selectedItem!=null){
+                    Intent intent = new Intent(Top_part_exercises_Activity.this, Push_UpsActivity.class);
                     intent.putExtra("selectedItem", selectedItem);
                     startActivity(intent);
-                }else if(selectedItem.equals("Plank") && selectedItem!=null){
-                    Intent intent = new Intent(Top_part_exercises_Activity.this, PlankActivity.class);
+                }else if(selectedItem.equals("Tricep Dips") && selectedItem!=null){
+                    Intent intent = new Intent(Top_part_exercises_Activity.this, TricepDipsActivity.class);
                     intent.putExtra("selectedItem", selectedItem);
                     startActivity(intent);
-                }else if(selectedItem.equals("Russian Twists") && selectedItem!=null){
-                    Intent intent = new Intent(Top_part_exercises_Activity.this, RussianTwistsActivity.class);
+                }else if(selectedItem.equals("Tricep Kickbacks") && selectedItem!=null){
+                    Intent intent = new Intent(Top_part_exercises_Activity.this, TricepKickbacksActivity.class);
                     intent.putExtra("selectedItem", selectedItem);
                     startActivity(intent);
                 }
@@ -304,27 +308,28 @@ public class Top_part_exercises_Activity extends AppCompatActivity {
                 String selectedItem = itemList.get(position);
 
                 // Создайте Intent для открытия новой активности
-                if (selectedItem.equals("Bicycle Crunches") && selectedItem!=null){
-                    Intent intent = new Intent(Top_part_exercises_Activity.this, BicycleCrunchesActivity.class);
+                if (selectedItem.equals("Bicep Curls") && selectedItem!=null){
+                    Intent intent = new Intent(Top_part_exercises_Activity.this, BicepCurlsActivity.class);
                     intent.putExtra("selectedItem", selectedItem);
                     startActivity(intent);
-                }else if (selectedItem.equals("Crunches") && selectedItem!=null){
-                    Intent intent = new Intent(Top_part_exercises_Activity.this, CrunchesActivity.class);
+                }else if (selectedItem.equals("Hammer Curls") && selectedItem!=null){
+                    Intent intent = new Intent(Top_part_exercises_Activity.this, HammerCurlsActivity.class);
                     intent.putExtra("selectedItem", selectedItem);
                     startActivity(intent);
-                }else if(selectedItem.equals("Leg Raises") && selectedItem!=null){
-                    Intent intent = new Intent(Top_part_exercises_Activity.this, LegRaisesActivity.class);
+                }else if(selectedItem.equals("Push-Ups") && selectedItem!=null){
+                    Intent intent = new Intent(Top_part_exercises_Activity.this, Push_UpsActivity.class);
                     intent.putExtra("selectedItem", selectedItem);
                     startActivity(intent);
-                }else if(selectedItem.equals("Plank") && selectedItem!=null){
-                    Intent intent = new Intent(Top_part_exercises_Activity.this, PlankActivity.class);
+                }else if(selectedItem.equals("Tricep Dips") && selectedItem!=null){
+                    Intent intent = new Intent(Top_part_exercises_Activity.this, TricepDipsActivity.class);
                     intent.putExtra("selectedItem", selectedItem);
                     startActivity(intent);
-                }else if(selectedItem.equals("Russian Twists") && selectedItem!=null){
-                    Intent intent = new Intent(Top_part_exercises_Activity.this, RussianTwistsActivity.class);
+                }else if(selectedItem.equals("Tricep Kickbacks") && selectedItem!=null){
+                    Intent intent = new Intent(Top_part_exercises_Activity.this, TricepKickbacksActivity.class);
                     intent.putExtra("selectedItem", selectedItem);
                     startActivity(intent);
                 }
+
 
             }
         });
