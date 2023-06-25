@@ -36,7 +36,7 @@ public class LungesActivity extends AppCompatActivity {
         txt_instructions=findViewById(R.id.description_Lunges);
         write_exercise=findViewById(R.id.button_Lunges);
 
-        DatabaseReference exercisesRef = FirebaseDatabase.getInstance().getReference("Exercises/Abs/Lunges");
+        DatabaseReference exercisesRef = FirebaseDatabase.getInstance().getReference("Exercises/Bottom_part/Lunges");
         exercisesRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -55,7 +55,7 @@ public class LungesActivity extends AppCompatActivity {
         write_exercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference exerciseRef = FirebaseDatabase.getInstance().getReference("Exercises/Abs/Lunges");
+                DatabaseReference exerciseRef = FirebaseDatabase.getInstance().getReference("Exercises/Bottom_part/Lunges");
                 exerciseRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {

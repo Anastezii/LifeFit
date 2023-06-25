@@ -36,7 +36,7 @@ public class DeadliftsActivity extends AppCompatActivity {
         txt_instructions=findViewById(R.id.description_Deadlift);
         write_exercise=findViewById(R.id.button_Deadlift);
 
-        DatabaseReference exercisesRef = FirebaseDatabase.getInstance().getReference("Exercises/Abs/Deadlifts");
+        DatabaseReference exercisesRef = FirebaseDatabase.getInstance().getReference("Exercises/Bottom_part/Deadlifts");
         exercisesRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -55,7 +55,7 @@ public class DeadliftsActivity extends AppCompatActivity {
         write_exercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference exerciseRef = FirebaseDatabase.getInstance().getReference("Exercises/Abs/Deadlifts");
+                DatabaseReference exerciseRef = FirebaseDatabase.getInstance().getReference("Exercises/Bottom_part/Deadlifts");
                 exerciseRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
