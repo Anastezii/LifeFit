@@ -71,10 +71,27 @@ public class Top_part_exercises_Activity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                String selectedItem = itemList.get(position);
 
-                // Создайте Intent для открытия новой активности
-                Intent intent = new Intent(Top_part_exercises_Activity.this, CaloriesActivity.class);
-                intent.putExtra("selectedItem", selectedItem);
-                startActivity(intent);
+                if (selectedItem.equals("Bicep Curls") && selectedItem!=null){
+                    Intent intent = new Intent(Top_part_exercises_Activity.this, BicepCurlsActivity.class);
+                    intent.putExtra("selectedItem", selectedItem);
+                    startActivity(intent);
+                }else if (selectedItem.equals("Hammer Curls") && selectedItem!=null){
+                    Intent intent = new Intent(Top_part_exercises_Activity.this, HammerCurlsActivity.class);
+                    intent.putExtra("selectedItem", selectedItem);
+                    startActivity(intent);
+                }else if(selectedItem.equals("Push-Ups") && selectedItem!=null){
+                    Intent intent = new Intent(Top_part_exercises_Activity.this, Push_UpsActivity.class);
+                    intent.putExtra("selectedItem", selectedItem);
+                    startActivity(intent);
+                }else if(selectedItem.equals("Tricep Dips") && selectedItem!=null){
+                    Intent intent = new Intent(Top_part_exercises_Activity.this, TricepDipsActivity.class);
+                    intent.putExtra("selectedItem", selectedItem);
+                    startActivity(intent);
+                }else if(selectedItem.equals("Tricep Kickbacks") && selectedItem!=null){
+                    Intent intent = new Intent(Top_part_exercises_Activity.this, TricepKickbacksActivity.class);
+                    intent.putExtra("selectedItem", selectedItem);
+                    startActivity(intent);
+                }
             }
         });
 
