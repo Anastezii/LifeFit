@@ -33,15 +33,14 @@
         android:id="@+id/description_bicycle_crunches"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="480dp"
         android:text=" "
         android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/button_bicycle_crunches"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.475"
+        app:layout_constraintHorizontal_bias="0.419"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.032"
+        app:layout_constraintTop_toBottomOf="@+id/imageView10"
+        app:layout_constraintVertical_bias="0.094"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
@@ -54,6 +53,6 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView10"
-        app:layout_constraintVertical_bias="0.636" />
+        app:layout_constraintVertical_bias="0.937" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

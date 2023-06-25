@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class RussianTwistsActivity extends AppCompatActivity {
+public class LegPressActivity extends AppCompatActivity {
 
     private TextView txt_instructions;
     private Button write_exercise;
@@ -31,32 +31,33 @@ public class RussianTwistsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_russian_twists);
+        setContentView(R.layout.activity_leg_press);
 
-        txt_instructions=findViewById(R.id.description_russian_twist);
-        write_exercise=findViewById(R.id.button_russian_twist);
 
-        DatabaseReference exercisesRef = FirebaseDatabase.getInstance().getReference("Exercises/Abs/Russian Twists");
+        txt_instructions=findViewById(R.id.description_LegPress);
+        write_exercise=findViewById(R.id.button_LegPress);
+
+        DatabaseReference exercisesRef = FirebaseDatabase.getInstance().getReference("Exercises/Abs/Leg Press");
         exercisesRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     String description = dataSnapshot.child("instructions").getValue(String.class);
-                    txt_instructions.setText(description);
+                    String equipment = dataSnapshot.child("equipment").getValue(String.class);
+                    txt_instructions.setText("Needed equipment :"+equipment+"  "+description);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(RussianTwistsActivity.this, databaseError.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(LegPressActivity.this, databaseError.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-
 
         write_exercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference exerciseRef = FirebaseDatabase.getInstance().getReference("Exercises/Abs/Russian Twists");
+                DatabaseReference exerciseRef = FirebaseDatabase.getInstance().getReference("Exercises/Abs/Leg Press");
                 exerciseRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -67,7 +68,7 @@ public class RussianTwistsActivity extends AppCompatActivity {
 
                                 int calories = snapshot.child("caloriesBurnedPerMinute").getValue(Integer.class);
 
-                                int new_Calories=calories*8;
+                                int new_Calories=calories*10;
 
                                 Date currentDate = new Date();
                                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -78,7 +79,7 @@ public class RussianTwistsActivity extends AppCompatActivity {
                                 writeNutritionDataToFirebase(exerciseData);
 
                             } catch (DatabaseException e ){
-                                Toast.makeText(RussianTwistsActivity.this,e.getMessage(),Toast.LENGTH_LONG).show();
+                                Toast.makeText(LegPressActivity.this,e.getMessage(),Toast.LENGTH_LONG).show();
                             }
 
 
@@ -87,7 +88,7 @@ public class RussianTwistsActivity extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(RussianTwistsActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(LegPressActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
 
@@ -95,22 +96,25 @@ public class RussianTwistsActivity extends AppCompatActivity {
             }
         });
 
+
+
+
     }
 
     private void writeNutritionDataToFirebase(ExerciseDataService exerciseData) {
 
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Sport_data");
-        String key = "Russian Twists";
+        String key = "LegPress";
         dbRef.child(key).setValue(exerciseData).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
 
-                    Toast.makeText(RussianTwistsActivity.this,"Exercise is added successfully!",
+                    Toast.makeText(LegPressActivity.this,"Exercise is added successfully!",
                             Toast.LENGTH_LONG).show();
 
                 }else{
-                    Toast.makeText(RussianTwistsActivity.this,"Something went wrong!",
+                    Toast.makeText(LegPressActivity.this,"Something went wrong!",
                             Toast.LENGTH_LONG).show();
                 }
             }

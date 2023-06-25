@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class RussianTwistsActivity extends AppCompatActivity {
+public class DeadliftsActivity extends AppCompatActivity {
 
     private TextView txt_instructions;
     private Button write_exercise;
@@ -31,12 +31,12 @@ public class RussianTwistsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_russian_twists);
+        setContentView(R.layout.activity_deadlifts);
 
-        txt_instructions=findViewById(R.id.description_russian_twist);
-        write_exercise=findViewById(R.id.button_russian_twist);
+        txt_instructions=findViewById(R.id.description_Deadlift);
+        write_exercise=findViewById(R.id.button_Deadlift);
 
-        DatabaseReference exercisesRef = FirebaseDatabase.getInstance().getReference("Exercises/Abs/Russian Twists");
+        DatabaseReference exercisesRef = FirebaseDatabase.getInstance().getReference("Exercises/Abs/Deadlifts");
         exercisesRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -48,15 +48,14 @@ public class RussianTwistsActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(RussianTwistsActivity.this, databaseError.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(DeadliftsActivity.this, databaseError.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-
 
         write_exercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference exerciseRef = FirebaseDatabase.getInstance().getReference("Exercises/Abs/Russian Twists");
+                DatabaseReference exerciseRef = FirebaseDatabase.getInstance().getReference("Exercises/Abs/Deadlifts");
                 exerciseRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -67,7 +66,7 @@ public class RussianTwistsActivity extends AppCompatActivity {
 
                                 int calories = snapshot.child("caloriesBurnedPerMinute").getValue(Integer.class);
 
-                                int new_Calories=calories*8;
+                                int new_Calories=calories*15;
 
                                 Date currentDate = new Date();
                                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -78,7 +77,7 @@ public class RussianTwistsActivity extends AppCompatActivity {
                                 writeNutritionDataToFirebase(exerciseData);
 
                             } catch (DatabaseException e ){
-                                Toast.makeText(RussianTwistsActivity.this,e.getMessage(),Toast.LENGTH_LONG).show();
+                                Toast.makeText(DeadliftsActivity.this,e.getMessage(),Toast.LENGTH_LONG).show();
                             }
 
 
@@ -87,7 +86,7 @@ public class RussianTwistsActivity extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(RussianTwistsActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(DeadliftsActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
 
@@ -95,22 +94,25 @@ public class RussianTwistsActivity extends AppCompatActivity {
             }
         });
 
+
+
+
     }
 
     private void writeNutritionDataToFirebase(ExerciseDataService exerciseData) {
 
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Sport_data");
-        String key = "Russian Twists";
+        String key = "Deadlifts";
         dbRef.child(key).setValue(exerciseData).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
 
-                    Toast.makeText(RussianTwistsActivity.this,"Exercise is added successfully!",
+                    Toast.makeText(DeadliftsActivity.this,"Exercise is added successfully!",
                             Toast.LENGTH_LONG).show();
 
                 }else{
-                    Toast.makeText(RussianTwistsActivity.this,"Something went wrong!",
+                    Toast.makeText(DeadliftsActivity.this,"Something went wrong!",
                             Toast.LENGTH_LONG).show();
                 }
             }

@@ -66,8 +66,6 @@ public class PlankActivity extends AppCompatActivity {
 
                                 int calories = snapshot.child("caloriesBurnedPerMinute").getValue(Integer.class);
 
-                                int new_Calories=calories*15;
-
                                 Date currentDate = new Date();
                                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                                 String dateString = dateFormat.format(currentDate);

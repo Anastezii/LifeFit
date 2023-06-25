@@ -72,7 +72,7 @@ public class BicycleCrunchesActivity extends AppCompatActivity {
                                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                                 String dateString = dateFormat.format(currentDate);
 
-                                ExerciseDataService exerciseData = new ExerciseDataService(dateString,  calories);
+                                ExerciseDataService exerciseData = new ExerciseDataService(dateString, new_Calories);
 
                                 writeNutritionDataToFirebase(exerciseData);
 

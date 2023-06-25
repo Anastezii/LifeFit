@@ -69,10 +69,27 @@ public class Bottom_part_exercises_Activity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selectedItem = itemList.get(position);
 
-                // Создайте Intent для открытия новой активности
-                Intent intent = new Intent(Bottom_part_exercises_Activity.this, CaloriesActivity.class);
-                intent.putExtra("selectedItem", selectedItem);
-                startActivity(intent);
+                if (selectedItem.equals("Calf Raises") && selectedItem!=null){
+                    Intent intent = new Intent(Bottom_part_exercises_Activity.this, CalfRaisesActivity.class);
+                    intent.putExtra("selectedItem", selectedItem);
+                    startActivity(intent);
+                }else if (selectedItem.equals("Deadlifts") && selectedItem!=null){
+                    Intent intent = new Intent(Bottom_part_exercises_Activity.this, DeadliftsActivity.class);
+                    intent.putExtra("selectedItem", selectedItem);
+                    startActivity(intent);
+                }else if(selectedItem.equals("Leg Press") && selectedItem!=null){
+                    Intent intent = new Intent(Bottom_part_exercises_Activity.this, LegPressActivity.class);
+                    intent.putExtra("selectedItem", selectedItem);
+                    startActivity(intent);
+                }else if(selectedItem.equals("Lunges") && selectedItem!=null){
+                    Intent intent = new Intent(Bottom_part_exercises_Activity.this, LungesActivity.class);
+                    intent.putExtra("selectedItem", selectedItem);
+                    startActivity(intent);
+                }else if(selectedItem.equals("Squats") && selectedItem!=null){
+                    Intent intent = new Intent(Bottom_part_exercises_Activity.this, SquatsActivity.class);
+                    intent.putExtra("selectedItem", selectedItem);
+                    startActivity(intent);
+                }
             }
         });
 
