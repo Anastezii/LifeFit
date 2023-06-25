@@ -22,6 +22,22 @@
         android:textColor="#D53E3E"/>
 
 
+    <SearchView
+        android:id="@+id/searchViewDinner"
+        android:layout_width="316dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="48dp"
+        android:iconifiedByDefault="false"
+        android:queryHint="Search"
+        app:layout_constraintBottom_toTopOf="@+id/spinner_dinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.168"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView36"
+        app:layout_constraintVertical_bias="0.25">
+
+    </SearchView>
+
     <TextView
         android:id="@+id/show_calories_dinner"
         android:layout_width="wrap_content"
@@ -81,11 +97,11 @@
         android:id="@+id/add_dinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="172dp"
+        android:layout_marginTop="248dp"
         android:backgroundTint="#B22222"
         android:text="Add"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.464"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gramms_dinner" />
 
@@ -98,7 +114,7 @@
         app:layout_constraintHorizontal_bias="0.131"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView36"
-        app:layout_constraintVertical_bias="0.507"
+        app:layout_constraintVertical_bias="0.755"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

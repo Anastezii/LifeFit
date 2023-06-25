@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,8 +41,10 @@ public class SportActivity extends AppCompatActivity {
     private Button add;
     private int calories;
     private TextView txt_calories;
+    private SearchView searchView;
 
     DatabaseReference reference;
+    private ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,7 @@ public class SportActivity extends AppCompatActivity {
         sportSpinner=findViewById(R.id.spinner_sport);
         add=findViewById(R.id.add_sport);
         txt_calories=findViewById(R.id.show_calories_sport);
+        searchView = findViewById(R.id.searchView);
 
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottomNavigationBar);
         bottomNavigationView.setSelectedItemId(R.id.bottom_home);
@@ -91,6 +95,20 @@ public class SportActivity extends AppCompatActivity {
 
         reference= FirebaseDatabase.getInstance().getReference("Activity");
 
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // Filter the spinner items based on the search query
+                adapter.getFilter().filter(newText);
+                return true;
+            }
+        });
+
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -109,7 +127,7 @@ public class SportActivity extends AppCompatActivity {
 
                     }
                 }
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, sportList);
+                adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, sportList);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 sportSpinner.setAdapter(adapter);
 

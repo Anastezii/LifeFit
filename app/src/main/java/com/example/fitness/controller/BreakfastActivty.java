@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,8 +38,10 @@ public class BreakfastActivty extends AppCompatActivity {
     private Button add;
     private Double proteins,carbohydrates,calories,fats;
     private TextView txt_calories;
+    private SearchView searchView;
 
     DatabaseReference reference;
+    private ArrayAdapter<String> adapter;
 
 
     @Override
@@ -50,8 +53,23 @@ public class BreakfastActivty extends AppCompatActivity {
         foodSpinner=findViewById(R.id.spinner_dinner);
         add=findViewById(R.id.add_dinner);
         txt_calories=findViewById(R.id.show_calories_breakfast);
+        searchView = findViewById(R.id.searchViewBreakfast);
 
         reference= FirebaseDatabase.getInstance().getReference("Food");
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // Filter the spinner items based on the search query
+                adapter.getFilter().filter(newText);
+                return true;
+            }
+        });
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -71,7 +89,7 @@ public class BreakfastActivty extends AppCompatActivity {
 
                     }
                 }
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, foodList);
+                 adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, foodList);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 foodSpinner.setAdapter(adapter);
 

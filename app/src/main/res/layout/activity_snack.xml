@@ -22,6 +22,22 @@
         android:textColor="#D53E3E"/>
 
 
+    <SearchView
+        android:id="@+id/searchViewSnack"
+        android:layout_width="316dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="12dp"
+        android:iconifiedByDefault="false"
+        android:queryHint="Search"
+        app:layout_constraintBottom_toTopOf="@+id/spinner_dinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.168"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView36"
+        app:layout_constraintVertical_bias="0.0">
+
+    </SearchView>
+
     <TextView
         android:id="@+id/show_calories_snack"
         android:layout_width="wrap_content"
@@ -81,13 +97,13 @@
         android:id="@+id/add_dinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="152dp"
+        android:layout_marginTop="216dp"
+        android:backgroundTint="#B22222"
         android:text="Add"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.464"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gramms_dinner"
-        android:backgroundTint="#B22222"/>
+        app:layout_constraintTop_toBottomOf="@+id/gramms_dinner" />
 
     <Spinner
         android:id="@+id/spinner_dinner"

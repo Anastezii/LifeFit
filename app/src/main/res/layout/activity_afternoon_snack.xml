@@ -49,6 +49,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView35" />
 
+    <SearchView
+        android:id="@+id/searchViewAfternoonSnack"
+        android:layout_width="316dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="4dp"
+        android:iconifiedByDefault="false"
+        android:queryHint="Search"
+        app:layout_constraintBottom_toTopOf="@+id/spinner_dinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.168"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView36"
+        app:layout_constraintVertical_bias="0.149">
+
+    </SearchView>
+
     <TextView
         android:id="@+id/textView37"
         android:layout_width="wrap_content"
@@ -80,7 +96,7 @@
         android:id="@+id/add_dinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="208dp"
         android:backgroundTint="#B22222"
         android:text="Add"
         app:layout_constraintEnd_toEndOf="parent"
@@ -97,7 +113,7 @@
         app:layout_constraintHorizontal_bias="0.131"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView36"
-        app:layout_constraintVertical_bias="0.425"
+        app:layout_constraintVertical_bias="0.807"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
