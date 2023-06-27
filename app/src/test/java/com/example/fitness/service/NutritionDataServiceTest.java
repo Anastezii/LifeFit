@@ -14,32 +14,46 @@ public class NutritionDataServiceTest {
 
     @Test
     public void getProtein() {
-        NutritionDataService nutritionDataService=new NutritionDataService("12/12/2023", 2.32, 12.36, 125.3, 1.3,25.3);
-        assertEquals(2.32,nutritionDataService.getProtein());
+        NutritionDataService nutritionDataService = new NutritionDataService("12/12/2023", 2.32, 12.36, 125.3, 1.3, 25.3);
+        double expectedProtein = 2.32;
+        double delta = 0.01; // Adjust the delta value as per your desired precision
+
+        assertEquals(expectedProtein, nutritionDataService.getProtein(), delta);
     }
 
     @Test
     public void getCarbohydrates() {
-        NutritionDataService nutritionDataService=new NutritionDataService("12/12/2023", 2.32, 12.36, 125.3, 1.3,25.3);
-        assertEquals(12.36,nutritionDataService.getCarbohydrates());
+        NutritionDataService nutritionDataService = new NutritionDataService("12/12/2023", 2.32, 12.36, 125.3, 1.3, 25.3);
+        double expectedCarbohydrates = 12.36;
+        double delta = 0.01; // Adjust the delta value as per your desired precision
+
+        assertEquals(expectedCarbohydrates, nutritionDataService.getCarbohydrates(), delta);
     }
 
     @Test
     public void getCalories() {
-        NutritionDataService nutritionDataService=new NutritionDataService("12/12/2023", 2.32, 12.36, 125.3, 1.3,25.3);
-        assertEquals(125.3,nutritionDataService.getCalories());
-    }
+        NutritionDataService nutritionDataService = new NutritionDataService("12/12/2023", 2.32, 12.36, 125.3, 1.3, 25.3);
+        double expectedCalories = 125.3;
+        double delta = 0.01; // Adjust the delta value as per your desired precision
 
+        assertEquals(expectedCalories, nutritionDataService.getCalories(), delta);
+    }
     @Test
     public void getFats() {
-        NutritionDataService nutritionDataService=new NutritionDataService("12/12/2023", 2.32, 12.36, 125.3, 1.3,25.3);
-        assertEquals(1.3,nutritionDataService.getFats());
+        NutritionDataService nutritionDataService = new NutritionDataService("12/12/2023", 2.32, 12.36, 125.3, 1.3, 25.3);
+        double expectedFats = 1.3;
+        double delta = 0.01; // Adjust the delta value as per your desired precision
+
+        assertEquals(expectedFats, nutritionDataService.getFats(), delta);
     }
 
     @Test
     public void getGrams() {
-        NutritionDataService nutritionDataService=new NutritionDataService("12/12/2023", 2.32, 12.36, 125.3, 1.3,25.3);
-        assertEquals(25.3,nutritionDataService.getGrams());
+        NutritionDataService nutritionDataService = new NutritionDataService("12/12/2023", 2.32, 12.36, 125.3, 1.3, 25.3);
+        double expectedGrams = 25.3;
+        double delta = 0.01; // Adjust the delta value as per your desired precision
+
+        assertEquals(expectedGrams, nutritionDataService.getGrams(), delta);
     }
 
     @Test
