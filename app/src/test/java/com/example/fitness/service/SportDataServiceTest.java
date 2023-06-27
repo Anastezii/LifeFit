@@ -35,10 +35,8 @@ public class SportDataServiceTest {
         String date = "2023-06-27";
         int expectedCalories = caloriesNew * minute;
 
-        // Act
         SportDataService result = calculateSportDataService(minute, caloriesNew, date);
 
-        // Assert
         assertEquals(date, result.getDate());
         assertEquals(expectedCalories, result.getCalories());
         assertEquals(minute, result.getMinutes());
