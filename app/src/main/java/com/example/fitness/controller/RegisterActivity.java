@@ -44,6 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Button registration_button;
     private int calories;
     private static final String TAG = "RegisterActivity";
+    private FirebaseAuth auth;
 
 
     @Override
@@ -121,7 +122,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void registerUser(String txt_name,String txt_email, String txt_gender, String txt_age, String txt_goals, String txt_height, String txt_weight, String txt_password) {
+    public void registerUser(String txt_name,String txt_email, String txt_gender, String txt_age, String txt_goals, String txt_height, String txt_weight, String txt_password) {
 
         FirebaseAuth auth=FirebaseAuth.getInstance();
         auth.createUserWithEmailAndPassword(txt_email, txt_password).addOnCompleteListener(RegisterActivity.this,
@@ -131,6 +132,8 @@ public class RegisterActivity extends AppCompatActivity {
                         if (task.isSuccessful()){
 
                             FirebaseUser firebaseUser=auth.getCurrentUser();
+
+                            registrationSuccessful = true;
 
                             // Update Display Name of User
                             UserProfileChangeRequest profileChangeRequest=new UserProfileChangeRequest.Builder().setDisplayName(txt_name).build();
@@ -174,6 +177,9 @@ public class RegisterActivity extends AppCompatActivity {
 
                         }
                         else {
+
+                            registrationSuccessful = false;
+
                             try {
                                 throw task.getException();
                             }catch (FirebaseAuthWeakPasswordException e){
@@ -192,5 +198,15 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public void setAuth(FirebaseAuth authMock) {
+        this.auth=authMock;
+    }
+
+   private boolean registrationSuccessful = false;
+
+    public boolean isRegistrationSuccessful() {
+        return registrationSuccessful;
     }
 }
