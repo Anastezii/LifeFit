@@ -324,7 +324,8 @@ public class CaloriesActivity extends AppCompatActivity implements SensorEventLi
             public void onClick(View v) {
 
                 String steps_number=count_steps.getText().toString();
-                count.setText("Your count of steps is : "+steps_number + "/"+"10 000");
+                int steps= (int) ((Integer.parseInt(steps_number)*1000) /0.7);
+                count.setText("Your count of steps is : "+steps + "/"+"10 000");
                 dialog.dismiss();
 
             }
